@@ -215,15 +215,15 @@ Esse projeto está licenciado sob uma licença do MIT - veja o arquivo [LICENSE.
 
 ## Referências
 
-* [Instalação e Configuração do Google Cloud SDK](https://dev.to/nabbisen/setting-up-google-cloud-sdk-of-gcp-on-archmanjaro-linux-19mk)
-* [Tutorial básico de usabilidade do SDK firebase_admin para python](https://rakibul.net/fb-realtime-db-python)
-* [Documentação de triggers HTTP da GCP](https://cloud.google.com/functions/docs/calling/http)
+* [Instalação e Configuração do Google Cloud SDK](https://dev.to/nabbisen/setting-up-google-cloud-sdk-of-gcp-on-archmanjaro-linux-19mk)  -  Instalação direto ao ponto
+* [Tutorial básico de usabilidade do SDK firebase_admin para python](https://rakibul.net/fb-realtime-db-python)  -  Extremamente útil, mostra casos de uso diretos e aborda praticamente tudo que é necessário
+* [Documentação de triggers HTTP da GCP](https://cloud.google.com/functions/docs/calling/http)  -  Mostra o formato da instrução curl para testar a função e para deploy
 * [Documentação de funções HTTP da GCP](https://cloud.google.com/functions/docs/writing/http)
 * [Documentação Add the Firebase Admin SDK to Your Server](https://firebase.google.com/docs/admin/setup)
 * [Writing Google Cloud Functions with Python 3](https://itnext.io/writing-google-cloud-functions-with-python-3-49ac2e5c8cb3)
-* [Python dependencies on cloud](https://cloud.google.com/functions/docs/writing/specifying-dependencies-python)
+* [Python dependencies on cloud](https://cloud.google.com/functions/docs/writing/specifying-dependencies-python)  -  Mostra como adicionar dependências que não podem ser simplesmente adicionadas ao arquivo requirements.txt
 * [Firebase Admin db docs](https://firebase.google.com/docs/reference/admin/python/firebase_admin.db)
-* [Retriving data on Firebase Admin SDK](https://firebase.google.com/docs/database/admin/retrieve-data)
+* [Retriving data on Firebase Admin SDK](https://firebase.google.com/docs/database/admin/retrieve-data)  -  Descreve o funcionamento de queries para o firebase admin
 
 ## Sugestões para trabalhos futuros
 
