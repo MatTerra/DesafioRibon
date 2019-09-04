@@ -185,7 +185,7 @@ Depois, na barra de opções, selecione a opção `database` (https://console.fi
 
 Para utilizar a função, é necessário criar entradas no banco de dados de usuários e de monstros(para utilizar o comando `killed_monster`).
 
-Depois de inicializar o banco, precisamos fornecer à função as credenciais de acesso, para isso vamos acessar as configurações do nosso projeto do Firebase e vamos clicar na aba *Contas de Serviço* e gerar uma nova chave privada. Com isso, baixaremos um arquivo json com nossa chave. Vamos mover o arquivo para o mesmo diretório do nosso arquivo `main.py`. **ATENÇÃO: ** *Essa chave não deve ser compartilhada com ninguém e nem disponibilizada em repositórios públicos ou aplicações cliente*. Depois de baixar, atualize o arquivo main.py com o nome do arquivo json e refaça o deploy.
+Depois de inicializar o banco, precisamos fornecer à função as credenciais de acesso, para isso vamos acessar as configurações do nosso projeto do Firebase e vamos clicar na aba *Contas de Serviço* e gerar uma nova chave privada. Com isso, baixaremos um arquivo json com nossa chave. Vamos mover o arquivo para o mesmo diretório do nosso arquivo `main.py`. **ATENÇÃO:** *Essa chave não deve ser compartilhada com ninguém e nem disponibilizada em repositórios públicos ou aplicações cliente*. Depois de baixar, atualize o arquivo main.py com o nome do arquivo json e refaça o deploy.
 ```python
     ...
     # Initialize DB connection
