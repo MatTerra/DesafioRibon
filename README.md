@@ -196,6 +196,10 @@ Depois de inicializar o banco, precisamos fornecer à função as credenciais de
 
 Pronto, agora sua função tem acesso ao seu banco de dados e poderá ser testada. Lembre que para o funcionamento correto é necessário criar ao menos um usuário e para o comando `killed_monster`, ao menos um monstro.
 
+## API
+
+Ainda documentaremos a API e seu funcionamento.
+
 ## Autores
 
 * **Mateus Berardo** - *Autor* - [MatTerra](https://github.com/MatTerra)
@@ -208,3 +212,19 @@ Esse projeto está licenciado sob uma licença do MIT - veja o arquivo [LICENSE.
 ## Agradecimentos
 
 * A big thanks to **Billie Thompson** - *README template* - [PurpleBooth](https://github.com/PurpleBooth)
+
+## Referências
+
+* [Instalação e Configuração do Google Cloud SDK](https://dev.to/nabbisen/setting-up-google-cloud-sdk-of-gcp-on-archmanjaro-linux-19mk)
+* [Tutorial básico de usabilidade do SDK firebase_admin para python](https://rakibul.net/fb-realtime-db-python)
+* [Documentação de triggers HTTP da GCP](https://cloud.google.com/functions/docs/calling/http)
+* [Documentação de funções HTTP da GCP](https://cloud.google.com/functions/docs/writing/http)
+* [Documentação Add the Firebase Admin SDK to Your Server](https://firebase.google.com/docs/admin/setup)
+* [Writing Google Cloud Functions with Python 3](https://itnext.io/writing-google-cloud-functions-with-python-3-49ac2e5c8cb3)
+* [Python dependencies on cloud](https://cloud.google.com/functions/docs/writing/specifying-dependencies-python)
+* [Firebase Admin db docs](https://firebase.google.com/docs/reference/admin/python/firebase_admin.db)
+* [Retriving data on Firebase Admin SDK](https://firebase.google.com/docs/database/admin/retrieve-data)
+
+## Sugestões para trabalhos futuros
+
+* [Testes Automatizados](https://cloud.google.com/functions/docs/bestpractices/testing)
