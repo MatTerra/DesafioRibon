@@ -1,6 +1,6 @@
 # Desafio processo seletivo Ribon
 
-Esse projeto consiste em uma API REST para armazenar dados de um jogo e conceder troféus baseado nos pontos obtidos pelo usuário. O desafio é o seguinte:
+Esse projeto consiste em uma API para armazenar dados de um jogo e conceder troféus baseado nos pontos obtidos pelo usuário. O desafio é o seguinte:
 
 Você deve criar um de sistema de troféus para um jogo. Pode usar o framework de desenvolvimento que preferir e não é necessário ter uma interface bonita. Gaste seu tempo com a arquitetura do código e dos dados.
 Vou descrever um sistema base simples que captam os registros e ela vai ter uma estrutura rigida, que não está disponível a melhorias e mudanças. É permitido a criação de novas tabelas e campos na tabela de usuário, mas não é permitido alterar a estrutura das tabelas com registros transacionais. Assuma que as tabelas de registros transacionais podem ter dezenas de milhões de registros então faça sua estrutura resolvendo possiveis problemas de performance. A principal parte da avaliação é como você vai construir o sistema de troféus em cima desse sistema de coleta de registros que já existe. Para a parte da lógica dos troféus você pode usar qualquer ferramenta que preferir, como um banco não relacional ou um framework de sua preferência.
@@ -69,15 +69,67 @@ O que o sistema de trofeus deve fazer ?
 
 ## Primeiros Passos
 
-Aqui colocamos instruções para configurarmos um ambiente local para desenvolvimento e testes. Veja as notas de deploy para instruções de como fazer o deploy do sistema para produção.
+O projeto foi desenvolvido para rodar como uma GCloud Function em um runtime python. Para fazer o deploy utilizamos o Google Cloud SDK ou criamos um arquivo zip para fazer upload no Google Cloud Console.
+Além da função, é necessário configurar um banco de dados de tempo real no Firebase para armazenar os dados e troféus.
 
 ### Pré requisitos
 
-Dependências necessárias e como instalá-las
+Para instalar o Google Cloud SDK siga os passos referentes ao seu sistema operacional
 
+#### Arch Linux/Manjaro
+
+Os passos estão disponíveis em [Setting Up Google Cloud SDK For GCP On Arch/Manjaro Linux](https://dev.to/nabbisen/setting-up-google-cloud-sdk-of-gcp-on-archmanjaro-linux-19mk)
+
+Primeiro vamos criar uma conta na plataforma de nuvem do Google no seguinte link [Teste Gratuito da Nuvem do Google](https://console.cloud.google.com/freetrial/)
+
+Em seguida vamos prosseguir para instalação do pacote google-cloud-sdk, que está disponível na AUR. (Podemos também seguir a instalação manual descrita no [guia de início rápido do Google](https://cloud.google.com/sdk/docs/quickstart-linux))
+
+Podemos utilizar um gerenciador de pacotes da AUR como o [yay]() ou [yaourt]() para instalar o SDK, ou realizar a instalação manual.
+
+Caso queira utilizar o `yay`, o comando será o seguinte:
 ```
-Dê exemplos
+yay -Sy google-cloud-sdk
 ```
+
+Para a instalação manual do pacote da AUR, siga os passos abaixo:
+
+Primeiro vamos clonar o repositório da AUR
+```
+git clone https://aur.archlinux.org/google-cloud-sdk.git
+```
+
+Em seguida vamos fazer o build do pacote
+```
+cd google-cloud-sdk/ && makepkg -si
+```
+
+Depois da instalação, vamos remover nossa cópia local do repositório
+```
+cd .. && rm -rf google-cloud-sdk/
+```
+
+Pronto, agora temos o sdk instalado e podemos partir para a inicialização dele que está na parte de instalação deste README
+
+#### Ubuntu/Debian >= Wheezy
+
+Os passos estão disponíveis em 
+
+Para instalar no Ubuntu pode ser necessário instalar o pacote lsb_release para recuperar o nome correto da versão Canonical. Em seguida rode os comandos abaixo
+
+```bash
+# Create environment variable for correct distribution
+export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
+
+# Add the Cloud SDK distribution URI as a package source
+echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+
+# Import the Google Cloud Platform public key
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+
+# Update the package list and install the Cloud SDK
+sudo apt-get update && sudo apt-get install google-cloud-sdk
+```
+
 
 ### Instalando
 
