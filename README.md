@@ -74,7 +74,7 @@ Além da função, é necessário configurar um banco de dados de tempo real no 
 
 ### Pré requisitos
 
-Para instalar o Google Cloud SDK siga os passos referentes ao seu sistema operacional
+Para instalar o Google Cloud SDK siga os passos referentes ao seu sistema operacional. A SDK depende de uma instalação do Python 2.7
 
 #### Arch Linux/Manjaro
 
@@ -82,29 +82,29 @@ Os passos estão disponíveis em [Setting Up Google Cloud SDK For GCP On Arch/Ma
 
 Primeiro vamos criar uma conta na plataforma de nuvem do Google no seguinte link [Teste Gratuito da Nuvem do Google](https://console.cloud.google.com/freetrial/)
 
-Em seguida vamos prosseguir para instalação do pacote google-cloud-sdk, que está disponível na AUR. (Podemos também seguir a instalação manual descrita no [guia de início rápido do Google](https://cloud.google.com/sdk/docs/quickstart-linux))
+Em seguida vamos prosseguir para instalação do pacote google-cloud-sdk, que está disponível na AUR. (Podemos também seguir a instalação manual descrita no [guia de início rápido do Google](https://cloud.google.com/sdk/docs/quickstart-linux?hl=pt-br))
 
-Podemos utilizar um gerenciador de pacotes da AUR como o [yay]() ou [yaourt]() para instalar o SDK, ou realizar a instalação manual.
+Podemos utilizar um gerenciador de pacotes da AUR como o [yay](https://aur.archlinux.org/packages/yay/) ou [yaourt](https://archlinux.fr/yaourt-en)(**DESCONTINUADO!!!**) para instalar o SDK, ou realizar a instalação manual.
 
 Caso queira utilizar o `yay`, o comando será o seguinte:
-```
+```bash
 yay -Sy google-cloud-sdk
 ```
 
 Para a instalação manual do pacote da AUR, siga os passos abaixo:
 
 Primeiro vamos clonar o repositório da AUR
-```
+```bash
 git clone https://aur.archlinux.org/google-cloud-sdk.git
 ```
 
 Em seguida vamos fazer o build do pacote
-```
+```bash
 cd google-cloud-sdk/ && makepkg -si
 ```
 
 Depois da instalação, vamos remover nossa cópia local do repositório
-```
+```bash
 cd .. && rm -rf google-cloud-sdk/
 ```
 
@@ -112,7 +112,7 @@ Pronto, agora temos o sdk instalado e podemos partir para a inicialização dele
 
 #### Ubuntu/Debian >= Wheezy
 
-Os passos estão disponíveis em 
+Os passos estão disponíveis em [Guia de início rápido para Debian e Ubuntu](https://cloud.google.com/sdk/docs/quickstart-debian-ubuntu?hl=pt-br)
 
 Para instalar no Ubuntu pode ser necessário instalar o pacote lsb_release para recuperar o nome correto da versão Canonical. Em seguida rode os comandos abaixo
 
@@ -130,24 +130,46 @@ curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 sudo apt-get update && sudo apt-get install google-cloud-sdk
 ```
 
+Pronto, agora temos o sdk instalado e podemos partir para a inicialização dele que está na parte de instalação deste README
+
 
 ### Instalando
 
-Uma série de exemplos passo a passo que ensinam a configurar um ambiente de desenvolvimento.
+Antes de inicializar o SDK na máquina local, vamos [criar um projeto do Google Cloud](https://console.cloud.google.com/cloud-resource-manager?hl=pt-br) que irá armazenar nossa função. Caso você já tenha projetos, siga para os passos seguintes.
 
-Diga o que será o passo
 
-```
-Dê o exemplo
-```
+Para configurar o sdk, basta rodar o seguinte comando e seguir as instruções dele. Ele irá pedir que você faça login e selecione seu projeto.
 
-E repita
-
-```
-Até acabar
+```bash
+gcloud init
 ```
 
-Termine com um exemplo de um teste rápido do sistema
+Pronto, a instalação está concluída e os comando gcloud e gsutil estão prontos para serem usados.
+
+A documentação do gcloud pode ser encontrada [aqui](https://cloud.google.com/sdk/gcloud/reference/) e a documentação do gsutil, [aqui](https://cloud.google.com/storage/docs/gsutil/).
+
+
+### Firebase
+
+Além do Cloud Functions, precisamos de um banco de dados firebase. Primeiro, crie um projeto do [Firebase](https://console.firebase.google.com/).
+
+Depois, na barra de opções, selecione a opção `database` (https://console.firebase.google.com/project/*PROJECT_NAME*/database) e crie um banco de dados de tempo real. Seu banco terá um link como *https://*PROJECT_NAME*/firebaseio.com*. Na aba *rules* do banco, copie e cole o seguinte:
+
+```json
+{
+  /* Visit https://firebase.google.com/docs/database/security to learn more about security rules. */
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "users": {
+      ".indexOn": ["id"]
+    },
+    "monsters":{
+      ".indexOn":["name"]
+    }
+  }
+}
+```
 
 ## Rodando os testes
 
