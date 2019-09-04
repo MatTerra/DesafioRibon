@@ -148,6 +148,19 @@ Pronto, a instalação está concluída e os comando gcloud e gsutil estão pron
 
 A documentação do gcloud pode ser encontrada [aqui](https://cloud.google.com/sdk/gcloud/reference/) e a documentação do gsutil, [aqui](https://cloud.google.com/storage/docs/gsutil/).
 
+Vamos agora fazer o primeiro deploy da função para nosso projeto utilizando o seguinte comando
+
+```bash
+gcloud beta functions deploy trophyAPI --runtime python37 --trigger-http
+```
+
+Aguarde a conclusão do deploy, que poderá levar até 2 minutos. Ao finalizar, ele te fornecerá o link da sua função, você pode testá-la pelo seu [console do Google Cloud](https://console.cloud.google.com) ou utilizando o comando cURL da seguinte forma:
+```bash
+curl -X POST LINK_DA_FUNCAO -H "Content-Type:application/json"  -d 'JSON_TESTE'
+```
+
+Sua função ainda não funcionará, pois não inicializamos o banco de dados dela e nem fornecemos as credenciais necessárias para acesso ao banco. Na próxima sessão abordaremos como configurar o banco de dados.
+
 
 ### Firebase
 
@@ -170,49 +183,23 @@ Depois, na barra de opções, selecione a opção `database` (https://console.fi
 }
 ```
 
-## Rodando os testes
+Para utilizar a função, é necessário criar entradas no banco de dados de usuários e de monstros(para utilizar o comando `killed_monster`).
 
-Explique como rodar os testes automatizados para este sistema
-
-### Quebre em teste de ponta a ponta
-
-Explique o que é testado e porque
-
-```
-Dê um exemplo
-```
-
-### E testes de estilo de código
-
-Explique o que é testado e porque
-
-```
-Dê um exemplo
+Depois de inicializar o banco, precisamos fornecer à função as credenciais de acesso, para isso vamos acessar as configurações do nosso projeto do Firebase e vamos clicar na aba *Contas de Serviço* e gerar uma nova chave privada. Com isso, baixaremos um arquivo json com nossa chave. Vamos mover o arquivo para o mesmo diretório do nosso arquivo `main.py`. **ATENÇÃO: ** *Essa chave não deve ser compartilhada com ninguém e nem disponibilizada em repositórios públicos ou aplicações cliente*. Depois de baixar, atualize o arquivo main.py com o nome do arquivo json e refaça o deploy.
+```python
+    ...
+    # Initialize DB connection
+    cred = credentials.Certificate('seu-arquivo.json')
+    try:
+    ...
 ```
 
-## Deploy
-
-Adicione notas para deploy para produção
-
-## Ferramentas de build
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contribuindo
-
-Por favor leia [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) para detalhes do nosso código de conduta e do processo de submissão de PR's para nós.
-
-## Versionamento
-
-Usamos [SemVer](http://semver.org/) para versionamento. Para versões disponíveis, veja as [tags nesse repositório](https://github.com/your/project/tags). 
+Pronto, agora sua função tem acesso ao seu banco de dados e poderá ser testada. Lembre que para o funcionamento correto é necessário criar ao menos um usuário e para o comando `killed_monster`, ao menos um monstro.
 
 ## Autores
 
-* **Billie Thompson** - *Trabalho Inicial* - [PurpleBooth](https://github.com/PurpleBooth)
-* **Mateus Berardo** - *Tradução para português* - [MatTerra](https://github.com/MatTerra)
-Veja também a lista de [contribuidores](https://github.com/your/project/contributors) que participaram nesse projeto.
+* **Mateus Berardo** - *Autor* - [MatTerra](https://github.com/MatTerra)
+Veja também a lista de [contribuidores](https://github.com/MatTerra/DesafioRibon/contributors) que participaram nesse projeto.
 
 ## Licença
 
@@ -220,6 +207,4 @@ Esse projeto está licenciado sob uma licença do MIT - veja o arquivo [LICENSE.
 
 ## Agradecimentos
 
-* Menção a todos que contribuíram para o repo
-* Inspirações
-* etc
+* A big thanks to **Billie Thompson** - *README template* - [PurpleBooth](https://github.com/PurpleBooth)
