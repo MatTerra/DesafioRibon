@@ -198,7 +198,60 @@ Pronto, agora sua função tem acesso ao seu banco de dados e poderá ser testad
 
 ## API
 
-Ainda documentaremos a API e seu funcionamento.
+A API recebe um json como entrada para executar um comando. Os campos básicos a serem preenchidos são `call_type` e `user_id` e estão presentes em todos os comandos. Comandos específicos possuem também campos extras a serem preenchidos. O parâmetro `call_type` define o comando a ser executado.
+
+Abaixo temos a documentação de cada chamada à API
+
+### new_user
+
+Cria um novo usuário com ID `user_id`
+
+Campos:
+ - `user_id`: id do novo usuário
+
+Exemplo:
+```json
+{"call_type":"new_user", "user_id":"0"}
+```
+
+### collected_coin
+
+Registra uma nova coleta de moeda e, caso necessário, um novo troféu
+
+Campos:
+ - `user_id`: id do novo usuário
+ - `value`: valor da moeda coletada
+
+Exemplo:
+```json
+{"call_type":"collected_coin", "user_id":"0", "value":"1"}
+```
+
+### killed_monster
+
+Registra a morte de um monstro que foi morto por um usuário e, caso necessário, um novo troféu
+
+Campos:
+ - `user_id`: id do novo usuário
+ - `monster`: nome do monstro morto
+
+Exemplo:
+```json
+{"call_type":"killed_monster", "user_id":"0", "monster":"turtle"}
+```
+
+### death
+
+Registra a morte do usuário e, caso necessário, um novo troféu
+
+Campos:
+ - `user_id`: id do novo usuário
+ - `timestamp`: timestamp da morte
+
+Exemplo:
+```json
+{"call_type":"death", "user_id":"0", "timestamp":"2019-09-05T14:46:09+00:00"}
+```
 
 ## Autores
 
