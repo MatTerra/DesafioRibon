@@ -31,7 +31,7 @@ def trophyAPI   (request):
         # Get user DB reference and validate ID
         ref_users = db.reference('users')
         user_ref = ref_users.order_by_child('id').equal_to(user).get()
-        if len(user_ref) == 0 and not call_type == 'new_user' :
+        if len(user_ref) == 0 and not (call_type == 'new_user' or call_type == 'new_monster') :
             return f'Invalid User ID'
         
         if call_type == 'new_user':
@@ -42,7 +42,9 @@ def trophyAPI   (request):
             ref = db.reference('users')
             # Register new user
             new_user = ref.push({"id" : user})
-            return (f'Ok - '+new_user.key+f' registered with id '+user)  
+            return (f'Ok - '+new_user.key+f' registered with id '+user)
+        if call_type == 'new_monster':
+            return f"Not implemented yet, monster not registered"  
               
         # Get DB ID for user
         user_obj = user_ref.popitem()
